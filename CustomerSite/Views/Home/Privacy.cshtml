@@ -1,6 +1,22 @@
-﻿@{
+﻿@model List<Backend.Data.Product>
+@{
     ViewData["Title"] = "Privacy Policy";
 }
 <h1>@ViewData["Title"]</h1>
 
-<p>Use this page to detail your site's privacy policy.</p>
+<table cellpadding="10" cellspacing="10" border="1">
+    <tr>
+        <th>Id</th>
+        <th>Name</th>
+        <th>SoLuong</th>
+    </tr>
+    if (Model !=  null)
+    @foreach(var product in Model)
+    {
+        <tr>
+            <th>@product.Id</th>
+            <th>@product.Name</th>
+            <th>@product.SoLuong</th>
+        </tr>
+    }
+</table>
