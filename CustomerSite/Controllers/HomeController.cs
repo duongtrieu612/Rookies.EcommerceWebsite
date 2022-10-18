@@ -9,23 +9,30 @@ namespace CustomerSite.Controllers
     {
         private readonly ILogger<HomeController> _logger;
 
-        public HomeController(ILogger<HomeController> logger)
+        //public HomeController(ILogger<HomeController> logger)
+        //{
+        //    _logger = logger;
+        //}
+
+        //test
+        private readonly IHttpClientFactory _clientFactory;
+        public HomeController(IHttpClientFactory clientFactory)
         {
-            _logger = logger;
+            _clientFactory = clientFactory;
         }
-        public HttpClient initial()
-        {
-            var Client = new HttpClient();
-            Client.BaseAddress = new Uri("https://localhost:7067");
-            return Client;
-        }
+        //public HttpClient initial()
+        //{
+        //    var Client = new HttpClient();
+        //    Client.BaseAddress = new Uri("https://localhost:7067");
+        //    return Client;
+        //}
         public async Task<IActionResult> Index()
         {
 
             Product list = new Product();
             List<Product> product = new List<Product>();
-            HttpClient client = initial();
-            HttpResponseMessage res = await client.GetAsync("api/Products");
+            HttpClient client = _clientFactory.CreateClient();
+            HttpResponseMessage res = await client.GetAsync("/api/Products");
             if (res.IsSuccessStatusCode)
             {
                 var result = res.Content.ReadAsStringAsync().Result;

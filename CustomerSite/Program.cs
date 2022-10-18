@@ -1,6 +1,7 @@
 using CustomerSite.Data;
 using Microsoft.AspNetCore.Identity;
 using Microsoft.EntityFrameworkCore;
+using Microsoft.Net.Http.Headers;
 
 var builder = WebApplication.CreateBuilder(args);
 
@@ -13,6 +14,11 @@ builder.Services.AddDatabaseDeveloperPageExceptionFilter();
 builder.Services.AddDefaultIdentity<IdentityUser>(options => options.SignIn.RequireConfirmedAccount = true)
     .AddEntityFrameworkStores<ApplicationDbContext>();
 builder.Services.AddControllersWithViews();
+builder.Services.AddHttpClient("", opt =>
+ {
+     opt.BaseAddress = new Uri(builder.Configuration["ApiUrl"] ?? "");
+     opt.DefaultRequestHeaders.Add(HeaderNames.Accept, "application/json");
+ });
 
 var app = builder.Build();
 
