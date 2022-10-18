@@ -1,4 +1,4 @@
-﻿@model List<Backend.Data.Product>
+﻿@model List<Product>
 @{
     ViewData["Title"] = "Privacy Policy";
 }
@@ -10,7 +10,7 @@
         <th>Name</th>
         <th>SoLuong</th>
     </tr>
-    if (Model !=  null)
+    @if (Model !=  null)
     @foreach(var product in Model)
     {
         <tr>

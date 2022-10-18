@@ -7,7 +7,7 @@ namespace Backend.Controllers
 {
     [Route("api/[controller]")]
     [ApiController]
-    public class ProductsController : ControllerBase
+    public class ProductsController : Controller
     {
         private readonly MyDBContext _context;
 
@@ -20,8 +20,9 @@ namespace Backend.Controllers
         public IActionResult GetAllProduct()
         {
             var dsProduct = _context.Products.ToList();
-            return Ok(dsProduct ?? new List<Product>());
+            return Json(dsProduct); 
         }
+
 
     }
 }
