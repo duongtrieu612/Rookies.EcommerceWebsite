@@ -29,26 +29,7 @@ namespace CustomerSite.Controllers
         public async Task<IActionResult> Index()
         {
 
-            Product list = new Product();
-            List<Product> product = new List<Product>();
-            HttpClient client = _clientFactory.CreateClient();
-            HttpResponseMessage res = await client.GetAsync("/api/Products");
-            if (res.IsSuccessStatusCode)
-            {
-                var result = res.Content.ReadAsStringAsync().Result;
-                product = JsonConvert.DeserializeObject<List<Product>>(result);
-                foreach (var item in product)
-                {
-                    list.product.Add(new Product
-                    {
-                        Id = item.Id,
-                        Name = item.Name,
-                        SoLuong = item.SoLuong,
-                    });
-                }
-            }
-            List<Product> model = list.product.ToList();
-            return View(model);
+            return View();
         }
 
         public IActionResult Privacy()
