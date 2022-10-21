@@ -1,0 +1,29 @@
+﻿@model List<Product>
+@{
+    ViewData["Title"] = "Home Page";
+}
+
+    @foreach(var product in Model)
+    {
+        <div class="col-4" style="margin: 10px">
+    <div class="card border-0" style="width: 18rem">
+        <img
+        src="https://bizweb.dktcdn.net/thumb/1024x1024/100/415/697/products/1-191df9b1-d355-42db-8ff1-2f5f85bc69f8.jpg?v=1655872617850"
+        class="card-img-top"
+        alt="..."
+        />
+        <div class="card-body" style="text-align: center">
+        <h5 class="card-title">@product.Name</h5>
+        <p class="card-text">
+            Some quick example text to build on the card title and
+            make up the bulk of the card's content.
+        </p>
+        <p class="card-text">
+            @product.SoLuong
+        </p>
+        <button class="btn btn-dark" style="width: 100%">Add to cart</button>
+        </div>
+    </div>
+</div>
+    }
+</table>

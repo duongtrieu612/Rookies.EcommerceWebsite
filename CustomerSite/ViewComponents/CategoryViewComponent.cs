@@ -4,25 +4,24 @@ using Newtonsoft.Json;
 
 namespace CustomerSite.ViewComponents
 {
-    public class ProductsViewComponent : ViewComponent
+    public class CategoryViewComponent : ViewComponent
     {
         private readonly IHttpClientFactory _clientFactory;
-        public ProductsViewComponent(IHttpClientFactory clientFactory)
+        public CategoryViewComponent(IHttpClientFactory clientFactory)
         {
             _clientFactory = clientFactory;
         }
         public async Task<IViewComponentResult> InvokeAsync()
         {
-            Product list = new Product();
-            List<Product> product = new List<Product>();
+            Category list = new Category();
+            List<Category> categories = new List<Category>();
             HttpClient client = _clientFactory.CreateClient();
-            var response = await client.GetAsync("Products");
+            var response = await client.GetAsync("Category");
             var contents = await response.Content.ReadAsStringAsync();
 
-            var products = JsonConvert.DeserializeObject<List<Product>>(contents);
+            var category = JsonConvert.DeserializeObject<List<Category>>(contents);
 
-            return View("Products",products);
+            return View("Category", category);
         }
     }
-
 }
