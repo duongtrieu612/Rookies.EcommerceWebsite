@@ -11,7 +11,9 @@ namespace Backend.Data
         [Required]
         [MaxLength(50)]
         public string Name { get; set; }
-        public int SoLuong { get; set; }
-        public string Hinh { get; set; }
+        public double Price { get; set; }
+        public string Image { get; set; }
+
+        public virtual Category Category { get; set; }
     }
 }

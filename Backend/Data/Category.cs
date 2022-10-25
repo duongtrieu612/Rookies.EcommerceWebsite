@@ -12,5 +12,7 @@ namespace Backend.Data
         [MaxLength(50)]
         public string Name { get; set; }
 
+        public virtual List<Product> Product { get; set; }
+
     }
 }
