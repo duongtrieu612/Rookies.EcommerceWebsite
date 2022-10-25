@@ -29,10 +29,13 @@ namespace CustomerSite.Controllers
         //    return Client;
         //}
         private readonly IProductService productService;
+        private readonly ICategoryService categoryService;
 
-        public HomeController(IProductService productService)
+        public HomeController(IProductService productService, ICategoryService categoryService)
         {
             this.productService = productService;
+            this.categoryService = categoryService;
+
         }
         public async Task<IActionResult> Index()
         {
@@ -55,6 +58,13 @@ namespace CustomerSite.Controllers
             ViewData["keyWord"] = searchString;
             return View(product);
         }
+
+        public async Task<IActionResult> Category(int id)
+        {
+            var product = await categoryService.GetCategoryId(id);
+            return View(product);
+        }
+
 
         [ResponseCache(Duration = 0, Location = ResponseCacheLocation.None, NoStore = true)]
         public IActionResult Error()

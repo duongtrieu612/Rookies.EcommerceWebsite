@@ -24,5 +24,18 @@ namespace CustomerSite.Services
 
             return data;
         }
+
+        public async Task<List<Product>> GetCategoryId(int id)
+        {
+            Product list = new Product();
+            List<Product> products = new List<Product>();
+            HttpClient client = _clientFactory.CreateClient();
+            var response = await client.GetAsync($"Category/{id}");
+            var contents = await response.Content.ReadAsStringAsync();
+
+            var data = JsonConvert.DeserializeObject<List<Product>>(contents);
+
+            return data;
+        }
     }
 }
