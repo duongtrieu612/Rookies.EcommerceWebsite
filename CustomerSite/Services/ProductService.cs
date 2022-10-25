@@ -8,32 +8,45 @@ namespace CustomerSite.Services
     public class ProductSevice : IProductService
     {
         private readonly IHttpClientFactory _clientFactory;
-
         public ProductSevice(IHttpClientFactory clientFactory)
         {
             _clientFactory = clientFactory;
         }
-
-
-        public async Task<List<Product>> GetProductAsync()
+        public async Task<List<Product>> GetAllProductsAsync()
         {
             Product list = new Product();
             List<Product> product = new List<Product>();
-            var HttpClient = _clientFactory.CreateClient();
-            var data = await HttpClient.GetAsync("Products");
-            var result = data.Content.ReadAsStringAsync().Result;
-            product = JsonConvert.DeserializeObject<List<Product>>(result);
-            foreach (var item in product)
-            {
-                list.product.Add(new Product
-                {
-                    Id = item.Id,
-                    Name = item.Name,
-                    SoLuong = item.SoLuong,
-                });
-            }
-            List<Product> model = list.product.ToList();
-            return model;
+            HttpClient client = _clientFactory.CreateClient();
+            var response = await client.GetAsync("Products");
+            var contents = await response.Content.ReadAsStringAsync();
+
+            var data = JsonConvert.DeserializeObject<List<Product>>(contents);
+
+            return data;
+        }
+        public async Task<Product> GetProductsId(int id)
+        {
+            Product list = new Product();
+            List<Product> product = new List<Product>();
+            HttpClient client = _clientFactory.CreateClient();
+            var response = await client.GetAsync($"Products/{id}");
+            var contents = await response.Content.ReadAsStringAsync();
+
+            var data = JsonConvert.DeserializeObject<Product>(contents);
+
+            return data;
+        }
+        public async Task<List<Product>> SearchProduct(string searchString)
+        {
+            Product list = new Product();
+            List<Product> product = new List<Product>();
+            HttpClient client = _clientFactory.CreateClient();
+            var response = await client.GetAsync($"Products/{searchString}");
+            var contents = await response.Content.ReadAsStringAsync();
+
+            var data = JsonConvert.DeserializeObject<List<Product>>(contents);
+
+            return data;
         }
     }
 }

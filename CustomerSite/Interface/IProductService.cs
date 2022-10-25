@@ -1,6 +1,12 @@
-﻿namespace CustomerSite.Interface
+﻿using CustomerSite.Models;
+
+namespace CustomerSite.Interface
 {
-    public class IProductService
+    public interface IProductService
     {
+        Task<List<Product>> GetAllProductsAsync();
+
+        Task<Product> GetProductsId(int id);
+        Task<List<Product>> SearchProduct(string searchString);
     }
 }

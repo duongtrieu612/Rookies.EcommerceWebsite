@@ -22,7 +22,7 @@ namespace CustomerSite.Clients
 		public async Task<List<Product>> GetAllProduct()
 		{
 			string baseUrl = "https://localhost:7067";
-			var response = await httpClient.GetAsync(baseUrl + "api/P roducts");
+			var response = await httpClient.GetAsync(baseUrl + "api/Products");
 			var contents = await response.Content.ReadAsStringAsync();
 
 			var products = JsonConvert.DeserializeObject<List<Product>>(contents);

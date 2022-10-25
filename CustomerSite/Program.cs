@@ -1,4 +1,6 @@
 using CustomerSite.Data;
+using CustomerSite.Interface;
+using CustomerSite.Services;
 using Microsoft.AspNetCore.Identity;
 using Microsoft.EntityFrameworkCore;
 using Microsoft.Net.Http.Headers;
@@ -18,7 +20,9 @@ builder.Services.AddHttpClient("", opt =>
  {
      opt.BaseAddress = new Uri(builder.Configuration["ApiUrl"] ?? "");
      opt.DefaultRequestHeaders.Add(HeaderNames.Accept, "application/json");
- });
+});
+
+builder.Services.AddScoped<IProductService, ProductSevice>();
 
 var app = builder.Build();
 
