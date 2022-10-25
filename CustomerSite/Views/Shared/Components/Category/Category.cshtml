@@ -7,9 +7,9 @@
     Category
   </button>
   <div class="dropdown-menu" aria-labelledby="dropdownMenuButton">
-    @foreach(var product in Model)
+    @foreach(var items in Model)
         {
-            <a class="dropdown-item" href="#">@product.Name</a>
+            <a class="dropdown-item" href="#">@items.Name</a>
         }
     </div>
 </div>

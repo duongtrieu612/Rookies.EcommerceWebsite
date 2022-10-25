@@ -22,7 +22,8 @@ builder.Services.AddHttpClient("", opt =>
      opt.DefaultRequestHeaders.Add(HeaderNames.Accept, "application/json");
 });
 
-builder.Services.AddScoped<IProductService, ProductSevice>();
+builder.Services.AddScoped<IProductService, ProductService>();
+builder.Services.AddScoped<ICategoryService, CategoryService>();
 
 var app = builder.Build();
 

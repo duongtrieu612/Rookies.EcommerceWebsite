@@ -13,10 +13,10 @@
     <div class="col-4">
     <div class="card border-0" style="width: 18rem">
         <img
-        src="@product.Hinh"
+        src="@product.Image"
         class="card-img-top"
         alt="..."
-        style="width: 288px; height: 288px"
+        style="width: 250px; height: 400px"
         />
         <div class="card-body" style="text-align: center">
         <h5 class="card-title">@product.Name</h5>
@@ -25,7 +25,7 @@
             make up the bulk of the card's content.
         </p>
         <p class="card-text">
-            @product.SoLuong
+            @product.Price
         </p>
         <button class="btn btn-dark" style="width: 100%">
             <a asp-area="" asp-controller="Home" asp-action="Detail" asp-route-id=@product.Id>
