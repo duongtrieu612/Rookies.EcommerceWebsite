@@ -12,5 +12,6 @@ namespace Backend.Data
         [MaxLength(50)]
         public string Name { get; set; }
         public int SoLuong { get; set; }
+        public string Hinh { get; set; }
     }
 }
