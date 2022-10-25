@@ -1,4 +1,5 @@
-﻿using CustomerSite.Models;
+﻿using CustomerSite.Interface;
+using CustomerSite.Models;
 using Microsoft.AspNetCore.Mvc;
 using Newtonsoft.Json;
 
@@ -6,22 +7,17 @@ namespace CustomerSite.ViewComponents
 {
     public class ProductsViewComponent : ViewComponent
     {
-        private readonly IHttpClientFactory _clientFactory;
-        public ProductsViewComponent(IHttpClientFactory clientFactory)
+        private readonly IProductService productService;
+
+        public ProductsViewComponent(IProductService productService)
         {
-            _clientFactory = clientFactory;
+            this.productService = productService;
         }
         public async Task<IViewComponentResult> InvokeAsync()
         {
-            Product list = new Product();
-            List<Product> product = new List<Product>();
-            HttpClient client = _clientFactory.CreateClient();
-            var response = await client.GetAsync("Products");
-            var contents = await response.Content.ReadAsStringAsync();
+            var product = await productService.GetAllProductsAsync();
 
-            var products = JsonConvert.DeserializeObject<List<Product>>(contents);
-
-            return View("Products",products);
+            return View("Products", product);
         }
     }
 

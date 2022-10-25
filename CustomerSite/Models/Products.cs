@@ -11,5 +11,6 @@ namespace CustomerSite.Models
         public string Name { get; set; }
 
         public int SoLuong { get; set; }
+        public string Hinh { get; set; }
     }
 }
