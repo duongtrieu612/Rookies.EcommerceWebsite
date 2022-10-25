@@ -5,10 +5,10 @@ using Newtonsoft.Json;
 
 namespace CustomerSite.Services
 {
-    public class ProductSevice : IProductService
+    public class ProductService : IProductService
     {
         private readonly IHttpClientFactory _clientFactory;
-        public ProductSevice(IHttpClientFactory clientFactory)
+        public ProductService(IHttpClientFactory clientFactory)
         {
             _clientFactory = clientFactory;
         }
