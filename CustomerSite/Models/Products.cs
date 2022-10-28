@@ -12,6 +12,7 @@ namespace CustomerSite.Models
 
         public double Price { get; set; }
         public string Image { get; set; }
+        public DateTime CreatedDate { get; set; }
 
         public virtual Category Category { get; set; }
     }
