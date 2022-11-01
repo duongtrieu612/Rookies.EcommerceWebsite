@@ -14,5 +14,32 @@ html {
 }
 
 body {
+  font-family:robo
   margin-bottom: 60px;
+}
+.navbar{
+    box-shadow:0px 6px 30px rgb(0,0,0,0.08); 
+}
+.navbar a{
+    text-transform:uppercase;
+    font-weight:bold;
+}
+h1, h2, h3, h4, h5 {   
+    color: #8071b3;
+}
+.container{
+    padding:10px;
+}
+.container h5{
+    text-align:center;
+}
+.card-body a{
+    color: #8071b3;
+}
+.card-price {
+    color: red;
+    font-weight: 700;
+}
+.card-title{
+    text-decoration:none;
 }

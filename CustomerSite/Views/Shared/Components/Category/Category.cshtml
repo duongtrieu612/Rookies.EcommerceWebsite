@@ -2,15 +2,9 @@
 @{
     ViewData["Title"] = "Home Page";
 }
-<div class="dropdown">
-  <button class="btn btn-secondary dropdown-toggle" type="button" id="dropdownMenuButton" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
-    Category
-  </button>
-  <div class="dropdown-menu" aria-labelledby="dropdownMenuButton">
     @foreach(var items in Model)
         {
-            <a class="dropdown-item" asp-controller="Home" asp-action="Category" asp-route-id=@items.Id >@items.Name</a>
+            <li class="nav-item active">
+                <a class="nav-link" asp-controller="Home" asp-action="Category" asp-route-id=@items.Id >@items.Name</a>
+            </li>
         }
-    </div>
-</div>
-</table>
