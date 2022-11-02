@@ -1,5 +1,6 @@
 import logo from './logo.svg';
 import './App.css';
+import axios from 'axios';
 
 function App() {
   return (
@@ -21,5 +22,12 @@ function App() {
     </div>
   );
 }
+axios.get('https://localhost:7067/api/Category')
+  .then(function (response) {
+    console.log(response);
+  })
+  .catch(function (error) {
+    console.log(error);
+  });
 
 export default App;
