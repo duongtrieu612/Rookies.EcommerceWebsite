@@ -26,6 +26,12 @@ namespace Backend.Controllers
             var dsCategory = _context.Categories.ToList();
             return Json(dsCategory);
         }
+        [HttpGet("{id}")]
+        public IActionResult GetCategoryById(int id)
+        {
+            var dsCategory = _context.Products.Where(x => x.Category.Id == id).ToList();
+            return Json(dsCategory);
+        }
 
         [HttpPost]
         public IActionResult CreateCategory(CategoryViewModel categoryViewModel)
@@ -35,15 +41,19 @@ namespace Backend.Controllers
             _context.SaveChanges();
             return Ok();
 
-        } 
-
-
-
-        [HttpGet("{id}")]
-        public IActionResult GetCategoryById(int id)
-        {
-            var dsCategory = _context.Products.Where(x => x.Category.Id == id).ToList();
-            return Json(dsCategory);
         }
+
+        [HttpDelete("{id}")]
+        public IActionResult DeleteCategory(int id)
+        {
+            _context.Categories.Remove(_context.Categories.FirstOrDefault(x => x.Id == id));
+            _context.SaveChanges();
+            return Ok();
+
+        }
+
+
+
+        
     }
 }
