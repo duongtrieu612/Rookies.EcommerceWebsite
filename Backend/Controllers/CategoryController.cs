@@ -3,6 +3,9 @@ using Microsoft.AspNetCore.Http;
 using Microsoft.AspNetCore.Mvc;
 using System.Diagnostics;
 using Newtonsoft.Json;
+using Backend.Models;
+using Shared;
+using AutoMapper;
 
 namespace Backend.Controllers
 {
@@ -11,9 +14,11 @@ namespace Backend.Controllers
     public class CategoryController : Controller
     {
         private readonly MyDBContext _context;
-        public CategoryController(MyDBContext context)
+        private readonly IMapper _mapper;
+        public CategoryController(MyDBContext context, IMapper mapper)
         {
             _context = context;
+            _mapper = mapper;
         }
         [HttpGet]
         public IActionResult GetAllCategory()
@@ -21,6 +26,18 @@ namespace Backend.Controllers
             var dsCategory = _context.Categories.ToList();
             return Json(dsCategory);
         }
+
+        [HttpPost]
+        public IActionResult CreateCategory(CategoryViewModel categoryViewModel)
+        {
+            var dsCategory = _mapper.Map<Category>(categoryViewModel);
+            _context.Categories.Add(dsCategory);
+            _context.SaveChanges();
+            return Ok();
+
+        } 
+
+
 
         [HttpGet("{id}")]
         public IActionResult GetCategoryById(int id)
