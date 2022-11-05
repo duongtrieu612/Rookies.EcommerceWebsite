@@ -7,15 +7,24 @@ import {Table} from 'react-bootstrap';
 function App() {
   const [categories, setCategory] = useState([]);
 
-  function loadCategory() {
-    axios.get("https://localhost:7067/api/Category").then((res) => {
+  async function loadCategory() {
+    await axios.get("https://localhost:7067/api/Category").then((res) => {
       setCategory(res.data);
+    });
+  }
+
+  function DeleteCategory(id) {
+     axios.delete(`https://localhost:7067/api/Category/${id}`)
+     .then(() => {
+        loadCategory()
     });
   }
 
   useEffect(() => {
     loadCategory();
   }, []);
+
+  
 
   return (
     <div className='container'>
@@ -35,7 +44,7 @@ function App() {
               <td>{category.name}</td>
               <td> 
                 <button className='btn btn-info btn-sm'>Edit</button>
-                <button className='btn btn-danger btn-sm'>Delete</button>
+                <button onClick={() => DeleteCategory(category.id)} className='btn btn-danger btn-sm' >Delete</button>
               </td>
             </tr>
           )}
