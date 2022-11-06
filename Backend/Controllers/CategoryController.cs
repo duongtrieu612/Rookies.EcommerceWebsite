@@ -42,6 +42,22 @@ namespace Backend.Controllers
             return Ok();
 
         }
+        [HttpPut]
+        public IActionResult EditCategory(CategoryViewModel categoryViewModel)
+        {
+            var data = _context.Categories.Where(x => x.Id == categoryViewModel.Id);
+            if (data != null)
+            {
+                var dsCategory = _mapper.Map<Category>(categoryViewModel);
+                _context.Categories.Update(dsCategory);
+                _context.SaveChanges();
+            }
+            else { 
+                return NotFound(); 
+            }
+            return Ok();
+
+        }
 
         [HttpDelete("{id}")]
         public IActionResult DeleteCategory(int id)
