@@ -3,27 +3,27 @@ import ReactDOM from 'react-dom/client';
 import './index.css';
 import App from './App';
 import reportWebVitals from './reportWebVitals';
-import { Container,Navbar } from 'react-bootstrap';
-
+import Navb from './Components/Navb';
+import Product from './Components/Product';
+import {
+  BrowserRouter as Router,
+  Route,
+  Routes,
+} from "react-router-dom";
+import {Card,Button, Container} from "react-bootstrap"
 
 const root = ReactDOM.createRoot(document.getElementById('root'));
 root.render(
-  <React.StrictMode>
-    <Navbar bg="dark" variant="dark">
-      <Container>
-        <Navbar.Brand href="#home">Admin Site</Navbar.Brand>
-        <Navbar.Toggle />
-        <Navbar.Collapse className="justify-content-end">
-          <Navbar.Text>
-            Signed in as: <a href="#login">...</a>
-          </Navbar.Text>
-        </Navbar.Collapse>
-      </Container>
-    </Navbar>
-
-    <App />
+  <React.StrictMode>  
+    <Router>
+    <Navb />
+      <Routes>
+        <Route  path="/" element={<App/>} />
+        <Route  path="/Product" element={<Product/>} />
+      </Routes  >
+    </Router>
   </React.StrictMode>
-);
+);  
 
 // If you want to start measuring performance in your app, pass a function
 // to log results (for example: reportWebVitals(console.log))
