@@ -14,6 +14,7 @@ namespace Backend.Mappings
         public AutoMapperProfile()
         {
             CreateMap<CategoryViewModel, Category>();
+            CreateMap<ProductViewModel, Product>();
         }
     }
 }
