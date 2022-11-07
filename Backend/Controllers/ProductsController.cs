@@ -1,6 +1,9 @@
-﻿using Backend.Data;
+﻿using AutoMapper;
+using Backend.Data;
+using Backend.Models;
 using Microsoft.AspNetCore.Http;
 using Microsoft.AspNetCore.Mvc;
+using Shared;
 using System.Diagnostics;
 
 namespace Backend.Controllers
@@ -10,10 +13,11 @@ namespace Backend.Controllers
     public class ProductsController : Controller
     {
         private readonly MyDBContext _context;
-
-        public ProductsController(MyDBContext context)
+        private readonly IMapper _mapper;
+        public ProductsController(MyDBContext context, IMapper mapper)
         {
             _context = context;
+            _mapper = mapper;
         }
 
         [HttpGet]
@@ -34,6 +38,26 @@ namespace Backend.Controllers
         {
             var dsProduct = _context.Products.Where(x => x.Name.Contains($"{search}")).ToList();
             return Json(dsProduct);
+        }
+
+        [HttpPost]
+        public IActionResult CreateProduct(ProductViewModel productViewModel)
+        {
+            var dsProduct = _mapper.Map<Product>(productViewModel);
+            _context.Products.Add(dsProduct);
+            _context.SaveChanges();
+            return Ok();
+
+        }
+
+
+        [HttpDelete("{id}")]
+        public IActionResult DeleteProduct(int id)
+        {
+            _context.Products.Remove(_context.Products.FirstOrDefault(x => x.Id == id));
+            _context.SaveChanges();
+            return Ok();
+
         }
 
 
