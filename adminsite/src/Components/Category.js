@@ -4,7 +4,7 @@ import React, { useEffect, useState } from "react";
 import {Table, Modal, Button} from 'react-bootstrap';
 import { useNavigate } from 'react-router-dom';
 
-function Product() {
+function Category() {
 
   const navigate = useNavigate();
   const [takeid, setId] = useState(null);
@@ -32,7 +32,7 @@ function Product() {
   const handleShow2 = () => setShow2(true);
 
   async function loadCategory() {
-    await axios.get("https://localhost:7067/api/Products").then((res) => {
+    await axios.get("https://localhost:7067/api/Category").then((res) => {
       setCategory(res.data);
     });
   }
@@ -77,7 +77,7 @@ function Product() {
     setId(id)
   }
   function DeleteCategory(id) {
-     axios.delete(`https://localhost:7067/api/Products/${id}`)
+     axios.delete(`https://localhost:7067/api/Category/${id}`)
      .then(() => {
         setShow(false)
         loadCategory()
@@ -171,17 +171,18 @@ function Product() {
            <div class="col-sm-3 mt-5 mb-4 text-gred">
               <div className="search">
                 <form class="form-inline">
-                 <input class="form-control mr-sm-2" type="search" placeholder="Search" aria-label="Search"/>               
+                 <input class="form-control mr-sm-2" type="search" placeholder="Search" aria-label="Search"/>
+                
                 </form>
               </div>    
               </div>  
-              <div class="col-sm-3 offset-sm-2 mt-5 mb-4 text-gred" style={{color:"green"}}><h3><b>Product</b></h3></div>
+              <div class="col-sm-3 offset-sm-2 mt-5 mb-4 text-gred" style={{color:"green"}}><h3><b>Category</b></h3></div>
               <div class="col-sm-3 offset-sm-1  mt-5 mb-4 text-gred">
               <Button variant="primary" onClick={AddCategory}>
-                Add New Product
+                Add New ca
               </Button>
              </div>
-      <Table className='table table-striped table-hover table-bordered' >
+      <Table className='table table-striped table-hover table-bordered'>
         <thead>
           <tr>
             <th>Id</th>
@@ -208,4 +209,4 @@ function Product() {
     </div>
   );
 }
-export default Product
+export default Category

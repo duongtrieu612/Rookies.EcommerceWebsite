@@ -164,8 +164,26 @@ function App() {
           </Modal.Footer>
         </Modal>
 
-      <button className='btn btn-secondary' onClick={AddCategory}>Add</button>
-      <Table className='table'>
+
+<div>
+<div className="crud shadow-lg p-3 mb-5 mt-5 bg-body rounded"> 
+          <div class="row ">
+           
+           <div class="col-sm-3 mt-5 mb-4 text-gred">
+              <div className="search">
+                <form class="form-inline">
+                 <input class="form-control mr-sm-2" type="search" placeholder="Search" aria-label="Search"/>
+                
+                </form>
+              </div>    
+              </div>  
+              <div class="col-sm-3 offset-sm-2 mt-5 mb-4 text-gred" style={{color:"green"}}><h3><b>Category</b></h3></div>
+              <div class="col-sm-3 offset-sm-1  mt-5 mb-4 text-gred">
+              <Button variant="primary" onClick={AddCategory}>
+                Add New ca
+              </Button>
+             </div>
+      <Table className='table table-striped table-hover table-bordered'>
         <thead>
           <tr>
             <th>Id</th>
@@ -186,6 +204,9 @@ function App() {
           )}
         </tbody>
       </Table>
+</div>
+</div>
+    </div>
     </div>
   );
 }
