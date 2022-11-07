@@ -42,18 +42,20 @@ namespace Backend.Controllers
             return Ok();
 
         }
-        [HttpPut]
-        public IActionResult EditCategory(CategoryViewModel categoryViewModel)
+        [HttpPut("{id}")]
+        public IActionResult EditCategory(int id, CategoryViewModel categoryViewModel)
         {
-            var data = _context.Categories.Where(x => x.Id == categoryViewModel.Id);
-            if (data != null)
+            categoryViewModel.Id = id;
+            var entity = _context.Categories.FirstOrDefault(x => x.Id == id);
+            if (entity == null)
             {
+                return NotFound();
+            }
+            else {
                 var dsCategory = _mapper.Map<Category>(categoryViewModel);
+                _context.ChangeTracker.Clear();
                 _context.Categories.Update(dsCategory);
                 _context.SaveChanges();
-            }
-            else { 
-                return NotFound(); 
             }
             return Ok();
 
