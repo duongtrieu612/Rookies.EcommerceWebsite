@@ -56,14 +56,15 @@ function App() {
   }
 
   //update
-  const EditCategory = (id) =>
+  const EditCategory = (id,name) =>
   {
     setShow2(true)
     setId(id)
+    setName(name)
   }
   function Update(e) {
     e.preventDefault();
-    axios.put(`https://localhost:7067/api/Category`, data)
+    axios.put(`https://localhost:7067/api/Category/${takeid}`, data)
     .then(() => {
       setShow2(false)
       navigate("/")
@@ -151,7 +152,6 @@ function App() {
                   placeholder="Nhập tên danh mục"
                 />
               </form>
-
             </div>
           </Modal.Body>
           <Modal.Footer>
@@ -179,7 +179,7 @@ function App() {
               <td>{category.id}</td>
               <td>{category.name}</td>
               <td> 
-                <button className='btn btn-info btn-sm' onClick={()=>EditCategory(category.id)}>Edit</button>
+                <button className='btn btn-info btn-sm' onClick={()=>EditCategory(category.id,category.name)}>Edit</button>
                 <button onClick={()=>DeleteClick(category.id)} className='btn btn-danger btn-sm' >Delete</button>                
               </td>
             </tr>
