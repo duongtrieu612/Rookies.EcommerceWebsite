@@ -42,7 +42,7 @@ namespace Backend.Controllers
 
         [HttpPost]
         public IActionResult CreateProduct(ProductViewModel productViewModel)
-        {
+         {
             var dsProduct = _mapper.Map<Product>(productViewModel);
             _context.Products.Add(dsProduct);
             _context.SaveChanges();
