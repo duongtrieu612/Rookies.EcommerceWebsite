@@ -9,8 +9,17 @@ function Product() {
   const navigate = useNavigate();
   const [takeid, setId] = useState(null);
   const [name, setName] = useState("");
+  const [price, setPrice] = useState("");
+  const [image, setImage] = useState("");
+  const [createdDate, setCreatedDate] = useState("");
+  const [categoryId, setCategoryId] = useState("");
   const data = {
     name: name,
+    price: price,
+    image: image,
+    createdDate: createdDate,
+    categoryId: categoryId,
+
   };
 
   const [categories, setCategory] = useState([]);
@@ -45,11 +54,9 @@ function Product() {
   }
   function submitForm(e) {
     e.preventDefault();
-    axios.post("https://localhost:7067/api/Category", data)
+    axios.post("https://localhost:7067/api/Products", data)
     .then(() => {
       setShow1(false)
-      navigate("/")
-      
       loadCategory()
   });
   }
@@ -63,7 +70,7 @@ function Product() {
   }
   function Update(e) {
     e.preventDefault();
-    axios.put(`https://localhost:7067/api/Category/${takeid}`, data)
+    axios.put(`https://localhost:7067/api/Products/${takeid}`, data)
     .then(() => {
       setShow2(false)
       navigate("/")
@@ -122,6 +129,34 @@ function Product() {
                   className="w-100"
                   type="text"
                   placeholder="Nhập tên danh mục"
+                />
+                <input
+                  value={price}
+                  onChange={(e) => setPrice(e.target.value)}
+                  className="w-100"
+                  type="text"
+                  placeholder="Nhập giá tiền"
+                />
+                <input
+                  value={image}
+                  onChange={(e) => setImage(e.target.value)}
+                  className="w-100"
+                  type="text"
+                  placeholder="Hình ảnh"
+                />
+                <input
+                  value={createdDate}
+                  onChange={(e) => setCreatedDate(e.target.value)}
+                  className="w-100"
+                  type="datetime"
+                  placeholder="Chọn Ngày"
+                />
+                <input
+                  value={categoryId}
+                  onChange={(e) => setCategoryId(e.target.value)}
+                  className="w-100"
+                  type="text"
+                  placeholder="Chọn danh mục"
                 />
               </form>
             </div>
