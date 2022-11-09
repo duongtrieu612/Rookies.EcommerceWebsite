@@ -17,7 +17,6 @@ function Product() {
     name: name,
     price: price,
     image: image,
-    createdDate: createdDate,
     categoryId: categoryId,
 
   };
@@ -143,13 +142,6 @@ function Product() {
                   className="w-100"
                   type="text"
                   placeholder="Hình ảnh"
-                />
-                <input
-                  value={createdDate}
-                  onChange={(e) => setCreatedDate(e.target.value)}
-                  className="w-100"
-                  type="datetime"
-                  placeholder="Chọn Ngày"
                 />
                 <input
                   value={categoryId}

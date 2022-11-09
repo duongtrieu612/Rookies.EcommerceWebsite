@@ -43,6 +43,7 @@ namespace Backend.Controllers
         [HttpPost]
         public IActionResult CreateProduct(ProductViewModel productViewModel)
          {
+            productViewModel.CreatedDate = DateTime.Now;
             var dsProduct = _mapper.Map<Product>(productViewModel);
             _context.Products.Add(dsProduct);
             _context.SaveChanges();
