@@ -48,7 +48,25 @@ namespace Backend.Controllers
             _context.Products.Add(dsProduct);
             _context.SaveChanges();
             return Ok();
+        }
 
+        [HttpPut("{id}")]
+        public IActionResult Product(int id, ProductViewModel productViewModel)
+        {
+            productViewModel.Id = id;
+            var entity = _context.Products.FirstOrDefault(x => x.Id == id);
+            if (entity == null)
+            {
+                return NotFound();
+            }
+            else
+            {
+                var dsProduct = _mapper.Map<Product>(productViewModel);
+                _context.ChangeTracker.Clear();
+                _context.Products.Update(dsProduct);
+                _context.SaveChanges();
+            }
+            return Ok();
 
         }
 
