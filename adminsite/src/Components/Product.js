@@ -21,7 +21,7 @@ function Product() {
 
   };
 
-  const [categories, setCategory] = useState([]);
+  const [products, setProduct] = useState([]);
   
 
   //deleteModal
@@ -39,15 +39,15 @@ function Product() {
   const handleClose2 = () => setShow2(false);
   const handleShow2 = () => setShow2(true);
 
-  async function loadCategory() {
+  async function loadProduct() {
     await axios.get("https://localhost:7067/api/Products").then((res) => {
-      setCategory(res.data);
+      setProduct(res.data);
     });
   }
 
   
 //add
-  function AddCategory()
+  function AddProduct()
   {
     setShow1(true)
   }
@@ -56,24 +56,25 @@ function Product() {
     axios.post("https://localhost:7067/api/Products", data)
     .then(() => {
       setShow1(false)
-      loadCategory()
+      loadProduct()
   });
   }
 
   //update
-  const EditCategory = (id,name) =>
+  const EditProduct = (id,name,price,image) =>
   {
     setShow2(true)
     setId(id)
     setName(name)
+    setPrice(price)
+    setImage(image)
   }
   function Update(e) {
     e.preventDefault();
     axios.put(`https://localhost:7067/api/Products/${takeid}`, data)
     .then(() => {
       setShow2(false)
-      navigate("/")
-      loadCategory()
+      loadProduct()
   });
   }
 
@@ -82,18 +83,18 @@ function Product() {
     setShow(true)
     setId(id)
   }
-  function DeleteCategory(id) {
+  function DeleteProduct(id) {
      axios.delete(`https://localhost:7067/api/Products/${id}`)
      .then(() => {
         setShow(false)
-        loadCategory()
+        loadProduct()
     });
   }
 
 
 
   useEffect(() => {
-    loadCategory();
+    loadProduct();
   }, []);
 
   
@@ -109,7 +110,7 @@ function Product() {
           <Button variant="secondary" onClick={handleClose}>
             Hủy
           </Button>
-          <Button variant="danger" onClick={()=>DeleteCategory(takeid)}>
+          <Button variant="danger" onClick={()=>DeleteProduct(takeid)}>
             Xóa
           </Button>
         </Modal.Footer>
@@ -177,6 +178,27 @@ function Product() {
                   type="text"
                   placeholder="Nhập tên danh mục"
                 />
+                <input
+                  value={price}
+                  onChange={(e) => setPrice(e.target.value)}
+                  className="w-100"
+                  type="text"
+                  placeholder="Nhập giá tiền"
+                />
+                <input
+                  value={image}
+                  onChange={(e) => setImage(e.target.value)}
+                  className="w-100"
+                  type="text"
+                  placeholder="Hình ảnh"
+                />
+                <input
+                  value={categoryId}
+                  onChange={(e) => setCategoryId(e.target.value)}
+                  className="w-100"
+                  type="text"
+                  placeholder="Chọn danh mục"
+                />
               </form>
             </div>
           </Modal.Body>
@@ -204,7 +226,7 @@ function Product() {
               </div>  
               <div className="col-sm-3 offset-sm-2 mt-5 mb-4 text-gred" style={{color:"green"}}><h3><b>Product</b></h3></div>
               <div className="col-sm-3 offset-sm-1  mt-5 mb-4 text-gred">
-              <Button variant="primary" onClick={AddCategory}>
+              <Button variant="primary" onClick={AddProduct}>
                 Add New Product
               </Button>
              </div>
@@ -213,17 +235,25 @@ function Product() {
           <tr>
             <th>Id</th>
             <th>Name</th>
+            <th>Price</th>
+            <th>Image</th>
+            <th>Created Date</th>
+            <th>Category ID</th>
             <th>Action</th>
           </tr>
         </thead>
         <tbody>
-          {categories.map(category =>
-            <tr key={category.id}>
-              <td>{category.id}</td>
-              <td>{category.name}</td>
+          {products.map(product =>
+            <tr key={product.id}>
+              <td>{product.id}</td>
+              <td>{product.name}</td>
+              <td>{product.price}</td>
+              <td>{product.image}</td>
+              <td>{product.createdDate}</td>
+              <td>{product.categoryId}</td>
               <td> 
-                <button className='btn btn-info btn-sm' onClick={()=>EditCategory(category.id,category.name)}>Edit</button>
-                <button onClick={()=>DeleteClick(category.id)} className='btn btn-danger btn-sm' >Delete</button>                
+                <button className='btn btn-info btn-sm' onClick={()=>EditProduct(product.id,product.name,product.price,product.image)}>Edit</button>
+                <button onClick={()=>DeleteClick(product.id)} className='btn btn-danger btn-sm' >Delete</button>                
               </td>
             </tr>
           )}
