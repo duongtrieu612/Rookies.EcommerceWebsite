@@ -22,7 +22,7 @@ namespace Backend.Migrations
 
             SqlServerModelBuilderExtensions.UseIdentityColumns(modelBuilder, 1L, 1);
 
-            modelBuilder.Entity("Backend.Data.Category", b =>
+            modelBuilder.Entity("Backend.Models.Category", b =>
                 {
                     b.Property<int>("Id")
                         .ValueGeneratedOnAdd()
@@ -40,7 +40,7 @@ namespace Backend.Migrations
                     b.ToTable("Category");
                 });
 
-            modelBuilder.Entity("Backend.Data.Product", b =>
+            modelBuilder.Entity("Backend.Models.Product", b =>
                 {
                     b.Property<int>("Id")
                         .ValueGeneratedOnAdd()
@@ -73,9 +73,9 @@ namespace Backend.Migrations
                     b.ToTable("Product");
                 });
 
-            modelBuilder.Entity("Backend.Data.Product", b =>
+            modelBuilder.Entity("Backend.Models.Product", b =>
                 {
-                    b.HasOne("Backend.Data.Category", "Category")
+                    b.HasOne("Backend.Models.Category", "Category")
                         .WithMany("Product")
                         .HasForeignKey("CategoryId")
                         .OnDelete(DeleteBehavior.Cascade)
@@ -84,7 +84,7 @@ namespace Backend.Migrations
                     b.Navigation("Category");
                 });
 
-            modelBuilder.Entity("Backend.Data.Category", b =>
+            modelBuilder.Entity("Backend.Models.Category", b =>
                 {
                     b.Navigation("Product");
                 });
