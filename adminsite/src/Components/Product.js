@@ -91,7 +91,7 @@ function Product() {
     });
   }
 
-  
+
 
   useEffect(() => {
     loadCategory();
@@ -201,17 +201,17 @@ function Product() {
 
 <div>
 <div className="crud shadow-lg p-3 mb-5 mt-5 bg-body rounded"> 
-          <div class="row ">
+          <div className="row ">
            
-           <div class="col-sm-3 mt-5 mb-4 text-gred">
+           <div className="col-sm-3 mt-5 mb-4 text-gred">
               <div className="search">
-                <form class="form-inline">
-                 <input class="form-control mr-sm-2" type="search" placeholder="Search" aria-label="Search"/>               
+                <form className="form-inline">
+                 <input className="form-control mr-sm-2" type="search" placeholder="Search" aria-label="Search"/>               
                 </form>
               </div>    
               </div>  
-              <div class="col-sm-3 offset-sm-2 mt-5 mb-4 text-gred" style={{color:"green"}}><h3><b>Product</b></h3></div>
-              <div class="col-sm-3 offset-sm-1  mt-5 mb-4 text-gred">
+              <div className="col-sm-3 offset-sm-2 mt-5 mb-4 text-gred" style={{color:"green"}}><h3><b>Product</b></h3></div>
+              <div className="col-sm-3 offset-sm-1  mt-5 mb-4 text-gred">
               <Button variant="primary" onClick={AddCategory}>
                 Add New Product
               </Button>
