@@ -21,6 +21,7 @@ namespace Backend.Controllers
         }
 
         [HttpGet]
+
         public IActionResult GetAllProduct()
         {
             var dsProduct = _context.Products.ToList();
@@ -77,7 +78,6 @@ namespace Backend.Controllers
             _context.Products.Remove(_context.Products.FirstOrDefault(x => x.Id == id));
             _context.SaveChanges();
             return Ok();
-
         }
 
 

@@ -15,6 +15,8 @@ namespace Backend.Models
         public string Image { get; set; }
         public DateTime CreatedDate { get; set; }
 
+        public virtual List<Rating> Rating { get; set; }
+
         public int CategoryId { get; set; }
 
         [ForeignKey("CategoryId")]
