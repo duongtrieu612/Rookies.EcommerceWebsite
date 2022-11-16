@@ -13,7 +13,6 @@ function Navb (){
                 <Nav className="me-auto">
                     <Link style={{ textDecoration: 'none', color:"white", marginRight:"20px"}} to="/Product">Product</Link>
                     <Link style={{ textDecoration: 'none', color:"white", marginRight:"20px" }} to="/Category">Category</Link>
-                    <Link style={{ textDecoration: 'none', color:"white", marginRight:"20px" }} to="/User">User</Link>
                 </Nav>
                 </Navbar.Collapse>
             </Container>

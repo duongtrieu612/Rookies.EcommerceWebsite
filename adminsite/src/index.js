@@ -12,7 +12,6 @@ import {
 } from "react-router-dom";
 import {Card,Button, Container} from "react-bootstrap"
 import Category from './Components/Category';
-import User from './Components/User';
 
 const root = ReactDOM.createRoot(document.getElementById('root'));
 root.render(
@@ -23,7 +22,6 @@ root.render(
         <Route  path="/" element={<App/>} />
         <Route  path="/Category" element={<Category/>} />
         <Route  path="/Product" element={<Product/>} />
-        <Route  path="/User" element={<User/>} />
       </Routes  >
     </Router>
   </React.StrictMode>

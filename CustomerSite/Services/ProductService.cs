@@ -2,6 +2,7 @@
 using CustomerSite.Interface;
 using CustomerSite.Models;
 using Newtonsoft.Json;
+using Shared;
 
 namespace CustomerSite.Services
 {
@@ -12,39 +13,35 @@ namespace CustomerSite.Services
         {
             _clientFactory = clientFactory;
         }
-        public async Task<List<Product>> GetAllProductsAsync()
+        public async Task<List<ProductViewModel>> GetAllProductsAsync()
         {
-            Product list = new Product();
-            List<Product> product = new List<Product>();
+
             HttpClient client = _clientFactory.CreateClient();
             var response = await client.GetAsync("Products");
             var contents = await response.Content.ReadAsStringAsync();
 
-            var data = JsonConvert.DeserializeObject<List<Product>>(contents);
+            var data = JsonConvert.DeserializeObject<List<ProductViewModel>>(contents);
 
             return data;
         }
-        public async Task<Product> GetProductsId(int id)
+        public async Task<ProductViewModel> GetProductsId(int id)
         {
-            Product list = new Product();
-            List<Product> product = new List<Product>();
+
             HttpClient client = _clientFactory.CreateClient();
             var response = await client.GetAsync($"Products/{id}");
             var contents = await response.Content.ReadAsStringAsync();
 
-            var data = JsonConvert.DeserializeObject<Product>(contents);
+            var data = JsonConvert.DeserializeObject<ProductViewModel>(contents);
 
             return data;
         }
-        public async Task<List<Product>> SearchProduct(string searchString)
+        public async Task<List<ProductViewModel>> SearchProduct(string searchString)
         {
-            Product list = new Product();
-            List<Product> product = new List<Product>();
             HttpClient client = _clientFactory.CreateClient();
             var response = await client.GetAsync($"Products/{searchString}");
             var contents = await response.Content.ReadAsStringAsync();
 
-            var data = JsonConvert.DeserializeObject<List<Product>>(contents);
+            var data = JsonConvert.DeserializeObject<List<ProductViewModel>>(contents);
 
             return data;
         }

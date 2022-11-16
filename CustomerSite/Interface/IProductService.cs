@@ -1,12 +1,12 @@
-﻿using CustomerSite.Models;
+﻿using Shared;
 
 namespace CustomerSite.Interface
 {
     public interface IProductService
     {
-        Task<List<Product>> GetAllProductsAsync();
+        Task<List<ProductViewModel>> GetAllProductsAsync();
 
-        Task<Product> GetProductsId(int id);
-        Task<List<Product>> SearchProduct(string searchString);
+        Task<ProductViewModel> GetProductsId(int id);
+        Task<List<ProductViewModel>> SearchProduct(string searchString);
     }
 }

@@ -1,11 +1,11 @@
-﻿using CustomerSite.Models;
+﻿using Shared;
 
 namespace CustomerSite.Interface
 {
     public interface ICategoryService
     {
-        Task<List<Category>> GetAllCategory();
+        Task<List<CategoryViewModel>> GetAllCategory();
 
-        Task<List<Product>> GetCategoryId(int id);
+        Task<List<ProductViewModel>> GetCategoryId(int id);
     }
 }

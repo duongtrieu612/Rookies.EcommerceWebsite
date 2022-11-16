@@ -14,5 +14,6 @@ namespace Shared.ViewModels
         public int RatingStar { get; set; }
 
         public int ProductId { get; set; }
+        public List<RatingViewModel> rating = new List<RatingViewModel>();
     }
 }

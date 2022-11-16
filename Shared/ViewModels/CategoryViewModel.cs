@@ -10,5 +10,7 @@ namespace Shared
     {
         public int Id { get; set; }
         public string Name { get; set; }
+
+        public List<CategoryViewModel> product = new List<CategoryViewModel>();
     }
 }

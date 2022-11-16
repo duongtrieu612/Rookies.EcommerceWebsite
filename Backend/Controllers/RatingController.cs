@@ -31,6 +31,7 @@ namespace Backend.Controllers
         [HttpPost]
         public IActionResult AddRating(RatingViewModel ratingViewModel)
         {
+            ratingViewModel.DateComment = DateTime.Now;
             var data = _mapper.Map<Rating>(ratingViewModel);
             _context.Ratings.Add(data);
             _context.SaveChanges();

@@ -1,0 +1,10 @@
+﻿@model List<Category>
+@{
+    ViewData["Title"] = "Home Page";
+}
+    @foreach(var items in Model)
+        {
+            <li class="nav-item active">
+                <a class="nav-link" asp-controller="Home" asp-action="Category" asp-route-id=@items.Id >@items.Name</a>
+            </li>
+        }

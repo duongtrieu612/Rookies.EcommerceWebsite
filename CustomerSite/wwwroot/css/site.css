@@ -17,6 +17,7 @@ body {
   font-family:robo
   margin-bottom: 60px;
 }
+
 .form-control {
     background-color: #f6f6f6;
     border-radius: 40px;
@@ -36,6 +37,9 @@ body {
 h1, h2, h3, h4, h5 {   
     color: #8071b3;
 }
+a{
+    text-decoration:none;
+}
 .container{
     padding:10px;
 }
@@ -51,4 +55,41 @@ h1, h2, h3, h4, h5 {
 }
 .card-title{
     text-decoration:none;
+}
+
+/*rating*/
+.commentBox {
+    background-color: #efefef;
+    padding: 10px;
+    border-radius: 10px;
+}
+
+.starFade {
+    background-image : url("/Images/StarFade.gif") ;
+    min-width: 30px;
+    min-height: 30px;
+    display: inline-block;
+    cursor: pointer;
+}
+
+.starFadeN {
+    background-image: url('/Images/StarFade.gif');
+    min-width: 30px;
+    min-height: 30px;
+    display: inline-block;
+}
+
+.starGlow {
+    background-image: url('/Images/starglow.gif');
+    min-width: 30px;
+    min-height: 30px;
+    display: inline-block;
+    cursor: pointer;
+}
+
+.starGlowN {
+    background-image: url('/Images/starglow.gif');
+    min-width: 30px;
+    min-height: 30px;
+    display: inline-block;
 }

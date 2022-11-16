@@ -1,11 +1,12 @@
 
 import axios from 'axios';
 import React, { useEffect, useState } from "react";
-import {Table, Modal, Button} from 'react-bootstrap';
+import {Table, Modal, Button, Dropdown} from 'react-bootstrap';
 import { useNavigate } from 'react-router-dom';
 
 function Product() {
 
+  const [searchTerm, setSearchTerm] = useState("");
   const navigate = useNavigate();
   const [takeid, setId] = useState(null);
   const [name, setName] = useState("");
@@ -18,11 +19,18 @@ function Product() {
     price: price,
     image: image,
     categoryId: categoryId,
+    createdDate: createdDate,
+  };
 
+  const createdata = {
+    name: name,
+    price: price,
+    image: image,
+    categoryId: categoryId,
   };
 
   const [products, setProduct] = useState([]);
-  
+  const [categories, setCategory] = useState([]);
 
   //deleteModal
   const [show, setShow] = useState(false);
@@ -44,16 +52,27 @@ function Product() {
       setProduct(res.data);
     });
   }
+  async function loadCategory() {
+    await axios.get("https://localhost:7067/api/Category").then((res) => {
+      setCategory(res.data);
+    });
+  }
 
   
 //add
   function AddProduct()
   {
+    setId("")
+    setName("")
+    setPrice("")
+    setImage("")
+    setCategoryId("")
+    setCreatedDate("")
     setShow1(true)
   }
   function submitForm(e) {
     e.preventDefault();
-    axios.post("https://localhost:7067/api/Products", data)
+    axios.post("https://localhost:7067/api/Products", createdata)
     .then(() => {
       setShow1(false)
       loadProduct()
@@ -61,13 +80,14 @@ function Product() {
   }
 
   //update
-  const EditProduct = (id,name,price,image) =>
+  const EditProduct = (id,name,price,image,createdDate) =>
   {
     setShow2(true)
     setId(id)
     setName(name)
     setPrice(price)
     setImage(image)
+    setCreatedDate(createdDate)
   }
   function Update(e) {
     e.preventDefault();
@@ -95,6 +115,7 @@ function Product() {
 
   useEffect(() => {
     loadProduct();
+    loadCategory();
   }, []);
 
   
@@ -118,7 +139,7 @@ function Product() {
 
       <Modal show={show1} onHide={handleClose1}>
           <Modal.Header closeButton>
-            <Modal.Title>Thêm Danh mục </Modal.Title>
+            <Modal.Title>Thêm hàng </Modal.Title>
           </Modal.Header>
           <Modal.Body>
             <div>
@@ -126,31 +147,42 @@ function Product() {
                 <input
                   value={name}
                   onChange={(e) => setName(e.target.value)}
-                  className="w-100"
+                  className="w-100 mt-2"
                   type="text"
-                  placeholder="Nhập tên danh mục"
+                  placeholder="Nhập tên hàng"
                 />
                 <input
                   value={price}
                   onChange={(e) => setPrice(e.target.value)}
-                  className="w-100"
+                  className="w-100 mt-2"
                   type="text"
                   placeholder="Nhập giá tiền"
                 />
                 <input
                   value={image}
                   onChange={(e) => setImage(e.target.value)}
-                  className="w-100"
+                  className="w-100 mt-2"
                   type="text"
                   placeholder="Hình ảnh"
                 />
                 <input
                   value={categoryId}
                   onChange={(e) => setCategoryId(e.target.value)}
-                  className="w-100"
+                  className="w-100 mt-2"
                   type="text"
+                  readOnly={true}
                   placeholder="Chọn danh mục"
                 />
+                <select 
+                  className='mt-2'
+                  value={categoryId} onChange={(e) => setCategoryId(e.target.value)}>
+                  {categories.map(category => 
+                  <option 
+                  key={category.id} 
+                  value={category.id}>
+                  {category.name}</option>
+                  )}
+                </select>
               </form>
             </div>
           </Modal.Body>
@@ -174,31 +206,50 @@ function Product() {
                 <input
                   value={name}
                   onChange={(e) => setName(e.target.value)}
-                  className="w-100"
+                  className="w-100 mt-2"
                   type="text"
                   placeholder="Nhập tên danh mục"
                 />
                 <input
                   value={price}
                   onChange={(e) => setPrice(e.target.value)}
-                  className="w-100"
+                  className="w-100 mt-2"
                   type="text"
                   placeholder="Nhập giá tiền"
                 />
                 <input
                   value={image}
                   onChange={(e) => setImage(e.target.value)}
-                  className="w-100"
+                  className="w-100 mt-2"
                   type="text"
                   placeholder="Hình ảnh"
                 />
                 <input
+                  value={createdDate}
+                  onChange={(e) => setCreatedDate(e.target.value)}
+                  className="w-100 text-light bg-secondary mt-2"
+                  type="text"
+                  readOnly={true}
+                  placeholder="Ngày"
+                />
+                <input
                   value={categoryId}
                   onChange={(e) => setCategoryId(e.target.value)}
-                  className="w-100"
+                  className="w-100 text-light bg-secondary mt-2"
                   type="text"
+                  readOnly={true}
                   placeholder="Chọn danh mục"
                 />
+                <select 
+                  className='mt-2'
+                  value={categoryId} onChange={(e) => setCategoryId(e.target.value)}>
+                  {categories.map(category => 
+                  <option 
+                  key={category.id} 
+                  value={category.id}>
+                  {category.name}</option>
+                  )}
+                </select>
               </form>
             </div>
           </Modal.Body>
@@ -220,7 +271,7 @@ function Product() {
            <div className="col-sm-3 mt-5 mb-4 text-gred">
               <div className="search">
                 <form className="form-inline">
-                 <input className="form-control mr-sm-2" type="search" placeholder="Search" aria-label="Search"/>               
+                 <input className="form-control mr-sm-2" type="search" placeholder="Search" onChange={(event) => {setSearchTerm(event.target.value);}}/>               
                 </form>
               </div>    
               </div>  
@@ -243,16 +294,25 @@ function Product() {
           </tr>
         </thead>
         <tbody>
-          {products.map(product =>
+          {products.filter((val)=>{
+            if(searchTerm=="")
+            {
+              return val
+            }
+            else if(val.name.toLowerCase().includes(searchTerm.toLowerCase()))
+            {
+              return val
+            }
+          }).map(product =>
             <tr key={product.id}>
               <td>{product.id}</td>
               <td>{product.name}</td>
               <td>{product.price}</td>
-              <td>{product.image}</td>
+              <td style={{width:"200px"}} >{product.image}</td>
               <td>{product.createdDate}</td>
               <td>{product.categoryId}</td>
               <td> 
-                <button className='btn btn-info btn-sm' onClick={()=>EditProduct(product.id,product.name,product.price,product.image)}>Edit</button>
+                <button className='btn btn-info btn-sm' onClick={()=>{EditProduct(product.id,product.name,product.price,product.image,product.createdDate);setCategoryId(product.categoryId)}}>Edit</button>
                 <button onClick={()=>DeleteClick(product.id)} className='btn btn-danger btn-sm' >Delete</button>                
               </td>
             </tr>

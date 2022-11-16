@@ -1,11 +1,11 @@
-﻿using CustomerSite.Models;
-using Newtonsoft.Json;
+﻿using Newtonsoft.Json;
+using Shared;
 
 namespace CustomerSite.Clients
 {
 	public interface IProductClient
 	{
-		Task<List<Product>> GetAllProduct();
+		Task<List<ProductViewModel>> GetAllProduct();
 	}
 
 	public class ProductClient : BaseClient, IProductClient
@@ -19,15 +19,15 @@ namespace CustomerSite.Clients
 		//{
 		//}
 
-		public async Task<List<Product>> GetAllProduct()
+		public async Task<List<ProductViewModel>> GetAllProduct()
 		{
 			string baseUrl = "https://localhost:7067";
 			var response = await httpClient.GetAsync(baseUrl + "api/Products");
 			var contents = await response.Content.ReadAsStringAsync();
 
-			var products = JsonConvert.DeserializeObject<List<Product>>(contents);
+			var products = JsonConvert.DeserializeObject<List<ProductViewModel>>(contents);
 
-			return products ?? new List<Product>();
+			return products ?? new List<ProductViewModel>();
 		}
 	}
 }

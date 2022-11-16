@@ -4,6 +4,8 @@ using System.Diagnostics;
 using Newtonsoft.Json;
 using CustomerSite.ViewComponents;
 using CustomerSite.Interface;
+using System.Dynamic;
+using Shared.ViewModels;
 
 namespace CustomerSite.Controllers
 {
@@ -30,11 +32,13 @@ namespace CustomerSite.Controllers
         //}
         private readonly IProductService productService;
         private readonly ICategoryService categoryService;
+        private readonly IRatingService ratingService;
 
-        public HomeController(IProductService productService, ICategoryService categoryService)
+        public HomeController(IProductService productService, ICategoryService categoryService, IRatingService ratingService)
         {
             this.productService = productService;
             this.categoryService = categoryService;
+            this.ratingService = ratingService;
 
         }
         public async Task<IActionResult> Index()
@@ -50,7 +54,18 @@ namespace CustomerSite.Controllers
         public async Task<IActionResult> Detail(int id)
         {
             var product = await productService.GetProductsId(id);
-            return View(product);
+            var rating = await ratingService.GetRatingById(id);
+            dynamic mymodel = new ExpandoObject();
+            mymodel.Product = product;
+            mymodel.Rating = rating;
+            
+            //Count Comment
+            ViewBag.Count = mymodel.Rating.Count;
+
+            var ratingSum = rating.Sum(d => d.RatingStar);
+            ViewBag.RatingSum = ratingSum;
+
+            return View(mymodel);
         }
         public async Task<IActionResult> Search(string searchString)
         {
@@ -65,6 +80,12 @@ namespace CustomerSite.Controllers
             return View(product);
         }
 
+
+        public async Task<IActionResult> AddRating(RatingViewModel ratingViewModel)
+        {
+            var product = await ratingService.AddRating(ratingViewModel);
+            return RedirectToAction("Detail", "Home", new { id = ratingViewModel.ProductId});
+        }
 
         [ResponseCache(Duration = 0, Location = ResponseCacheLocation.None, NoStore = true)]
         public IActionResult Error()

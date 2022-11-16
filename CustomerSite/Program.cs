@@ -24,6 +24,8 @@ builder.Services.AddHttpClient("", opt =>
 
 builder.Services.AddScoped<IProductService, ProductService>();
 builder.Services.AddScoped<ICategoryService, CategoryService>();
+builder.Services.AddScoped<IRatingService, RatingService>();
+
 
 var app = builder.Build();
 

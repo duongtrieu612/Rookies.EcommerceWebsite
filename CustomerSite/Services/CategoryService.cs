@@ -1,7 +1,7 @@
 ﻿using CustomerSite.Interface;
-using CustomerSite.Models;
 using Microsoft.AspNetCore.Mvc;
 using Newtonsoft.Json;
+using Shared;
 
 namespace CustomerSite.Services
 {
@@ -12,28 +12,26 @@ namespace CustomerSite.Services
         {
             _clientFactory = clientFactory;
         }
-        public async Task<List<Category>> GetAllCategory()
+        public async Task<List<CategoryViewModel>> GetAllCategory()
         {
-            Category list = new Category();
-            List<Category> categories = new List<Category>();
+
             HttpClient client = _clientFactory.CreateClient();
             var response = await client.GetAsync("Category");
             var contents = await response.Content.ReadAsStringAsync();
 
-            var data = JsonConvert.DeserializeObject<List<Category>>(contents);
+            var data = JsonConvert.DeserializeObject<List<CategoryViewModel>>(contents);
 
             return data;
         }
 
-        public async Task<List<Product>> GetCategoryId(int id)
+        public async Task<List<ProductViewModel>> GetCategoryId(int id)
         {
-            Product list = new Product();
-            List<Product> products = new List<Product>();
+
             HttpClient client = _clientFactory.CreateClient();
             var response = await client.GetAsync($"Category/{id}");
             var contents = await response.Content.ReadAsStringAsync();
 
-            var data = JsonConvert.DeserializeObject<List<Product>>(contents);
+            var data = JsonConvert.DeserializeObject<List<ProductViewModel>>(contents);
 
             return data;
         }

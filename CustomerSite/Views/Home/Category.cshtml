@@ -1,38 +1,37 @@
-﻿@model List<Product>
+﻿@using Shared
+@model List<ProductViewModel>
 @{
     ViewData["Title"] = "Category";
     Layout = "~/Views/Shared/_Layout.cshtml";
 }
 
-<h1>Category</h1>
-<div class="row">   
-    @foreach(var product in Model)
-    {
-    <div class="col-4">
-    <div class="card border-0" style="width: 18rem">
-        <img
-        src="@product.Image"
-        class="card-img-top"
-        alt="..."
-        style="width: 250px; height: 400px"
-        />
-        <div class="card-body" style="text-align: center">
-        <h5 class="card-title">@product.Name</h5>
-        <p class="card-text">
-            Some quick example text to build on the card title and
-            make up the bulk of the card's content.
-        </p>
-        <p class="card-text">
-            @product.Price
-        </p>
-        <button class="btn btn-dark" style="width: 100%">
-            <a asp-area="" asp-controller="Home" asp-action="Detail" asp-route-id=@product.Id>
-                Detail
-            </a>
-            </button>
+<h3>Category</h3>
+<section>
+<div class="container px-4 px-lg-5 mt-1">
+    <div class="row gx-4 gx-lg-5 row-cols-2 row-cols-md-3 row-cols-xl-4 justify-content-center">
+                    
+        @foreach(var product in Model)
+            {
+                <div class="col mb-5">
+                    <div>
+                        <a asp-area="" asp-controller="Home" asp-action="Detail" asp-route-id=@product.Id>
+                        <!-- Product image-->
+                        <img class="card-img-top" src="@product.Image" alt="..." />
+                        <!-- Product details-->
+                        <div class="card-body p-4">
+                            <div class="text-center">
+                                <!-- Product name-->
+                                <h5>@product.Name</h5>
+                                <!-- Product price-->
+                                <span style="color:red">@product.Price <u>đ</u></span>
+                            </div>
+                        </div>
+                        </a>
+                    </div>
+                </div>
+        }
+                    
         </div>
     </div>
-    </div>
-    }
-    </div>
+    </section>
 

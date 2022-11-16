@@ -12,5 +12,6 @@ namespace Shared
         public DateTime CreatedDate { get; set; }
 
         public int CategoryId { get; set; }
+        public List<ProductViewModel> product = new List<ProductViewModel>();
     }
 }
